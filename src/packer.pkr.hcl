@@ -77,7 +77,7 @@ source "amazon-ebs" "ubuntu" {
   region_kms_key_ids = var.region_kms_keys
   skip_create_ami    = var.skip_create_ami
   source_ami         = data.amazon-ami.ubuntu_jammy.id
-  ssh_username       = "admin"
+  ssh_username       = "ubuntu"
   subnet_filter {
     filters = {
       "tag:Name" = "AMI Build"
