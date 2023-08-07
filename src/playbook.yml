@@ -5,5 +5,5 @@
 - name: Import AWS playbook
   ansible.builtin.import_playbook: aws.yml
 
-- name: Import Example playbook
-  ansible.builtin.import_playbook: example.yml
+- name: Import cloud-init playbook
+  ansible.builtin.import_playbook: cloud_init.yml

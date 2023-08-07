@@ -13,8 +13,6 @@
   src: https://github.com/cisagov/ansible-role-clamav
 - name: cloudwatch_agent
   src: https://github.com/cisagov/ansible-role-cloudwatch-agent
-- name: example
-  src: https://github.com/cisagov/skeleton-ansible-role
 - name: htop
   src: https://github.com/cisagov/ansible-role-htop
 - name: nvme
