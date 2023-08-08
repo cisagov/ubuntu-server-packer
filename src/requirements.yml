@@ -1,10 +1,6 @@
 ---
 - name: amazon_efs_utils
   src: https://github.com/cisagov/ansible-role-amazon-efs-utils
-# Note that Amazon SSM Agent is already present in the source AMI,
-# so it does not need to be installed again.
-# For more info, see
-# https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-ubuntu-about-v16.html
 - name: automated_security_updates
   src: https://github.com/cisagov/ansible-role-automated-security-updates
 - name: banner
