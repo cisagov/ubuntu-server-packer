@@ -16,9 +16,6 @@
     # so it does not need to be installed again.
     # For more info, see
     # https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-ubuntu-about-v16.html
-    # - name: Install Amazon SSM Agent
-    #   ansible.builtin.include_role:
-    #     name: amazon_ssm_agent
     - name: Install chrony and configure it for use within AWS
       ansible.builtin.include_role:
         name: chrony_aws
