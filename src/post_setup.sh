@@ -8,7 +8,7 @@ sudo snap remove amazon-ssm-agent
 sudo snap install amazon-ssm-agent --classic
 sudo snap switch --channel=candidate amazon-ssm-agent
 [[ -d /etc/amazon/ssm ]] || sudo mkdir -p /etc/amazon/ssm
-sudo cp -RT /snap/amazon-ssm-agent/current /etc/amazon/ssm
+sudo cp -RT /snap/amazon-ssm-agent/current/ /etc/amazon/ssm/
 sudo cp /snap/amazon-ssm-agent/current/seelog.xml.template /etc/amazon/ssm/seelog.xml
 sudo sed -i 's/"info"/"debug"/' /etc/amazon/ssm/seelog.xml
 echo "
