@@ -46,7 +46,7 @@ variable "skip_create_ami" {
   type        = bool
 }
 
-data "amazon-ami" "ubuntu_jammy" {
+data "amazon-ami" "ubuntu_server_jammy" {
   filters = {
     name                = "ubuntu/images/hvm-ssd/*ubuntu-jammy-22.04-amd64-server*"
     root-device-type    = "ebs"
@@ -59,8 +59,8 @@ data "amazon-ami" "ubuntu_jammy" {
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
-source "amazon-ebs" "ubuntu" {
-  ami_name                    = "ubuntu-hvm-${local.timestamp}-x86_64-ebs"
+source "amazon-ebs" "ubuntu_server" {
+  ami_name                    = "ubuntu-server-hvm-${local.timestamp}-x86_64-ebs"
   ami_regions                 = var.ami_regions
   associate_public_ip_address = true
   encrypt_boot                = true
@@ -76,7 +76,7 @@ source "amazon-ebs" "ubuntu" {
   region             = var.build_region
   region_kms_key_ids = var.region_kms_keys
   skip_create_ami    = var.skip_create_ami
-  source_ami         = data.amazon-ami.ubuntu_jammy.id
+  source_ami         = data.amazon-ami.ubuntu_server_jammy.id
   ssh_username       = "ubuntu"
   subnet_filter {
     filters = {
@@ -85,7 +85,7 @@ source "amazon-ebs" "ubuntu" {
   }
   tags = {
     Application        = "Ubuntu Server"
-    Base_AMI_Name      = data.amazon-ami.ubuntu_jammy.name
+    Base_AMI_Name      = data.amazon-ami.ubuntu_server_jammy.name
     GitHub_Release_URL = var.release_url
     OS_Version         = "Ubuntu Jammy"
     Pre_Release        = var.is_prerelease
@@ -103,7 +103,7 @@ source "amazon-ebs" "ubuntu" {
 }
 
 build {
-  sources = ["source.amazon-ebs.ubuntu"]
+  sources = ["source.amazon-ebs.ubuntu_server"]
 
   provisioner "ansible" {
     playbook_file = "src/upgrade.yml"

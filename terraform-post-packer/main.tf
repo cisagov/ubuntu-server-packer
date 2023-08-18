@@ -29,7 +29,7 @@ data "aws_ami_ids" "historical_amis" {
   filter {
     name = "name"
     values = [
-      "ubuntu-hvm-*-x86_64-ebs",
+      "ubuntu-server-hvm-*-x86_64-ebs",
     ]
   }
 
