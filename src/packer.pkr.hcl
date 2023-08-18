@@ -84,7 +84,7 @@ source "amazon-ebs" "ubuntu" {
     }
   }
   tags = {
-    Application        = "Ubuntu"
+    Application        = "Ubuntu Server"
     Base_AMI_Name      = data.amazon-ami.ubuntu_jammy.name
     GitHub_Release_URL = var.release_url
     OS_Version         = "Ubuntu Jammy"

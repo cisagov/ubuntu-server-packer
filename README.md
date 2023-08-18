@@ -1,6 +1,6 @@
-# ubuntu-packer #
+# ubuntu-server-packer #
 
-[![GitHub Build Status](https://github.com/cisagov/ubuntu-packer/workflows/build/badge.svg)](https://github.com/cisagov/ubuntu-packer/actions)
+[![GitHub Build Status](https://github.com/cisagov/ubuntu-server-packer/workflows/build/badge.svg)](https://github.com/cisagov/ubuntu-server-packer/actions)
 
 This project can be used to build an
 [Ubuntu 22.04 (Jammy Jellyfish)](https://releases.ubuntu.com/jammy/) AMI.
@@ -44,7 +44,7 @@ of the Project Setup README.
 
 If you have appropriate permissions for the repository you can view existing
 secrets on the
-[appropriate page](https://github.com/cisagov/ubuntu-packer/settings/secrets)
+[appropriate page](https://github.com/cisagov/ubuntu-server-packer/settings/secrets)
 in the repository's settings.
 
 IMPORTANT: The account where your images will be built must have a VPC and
@@ -89,13 +89,13 @@ Add the following blocks to your AWS credentials file (be sure to replace the
 dummy account ID in the `role_arn` with your own):
 
 ```console
-[build-ubuntu-packer]
+[build-ubuntu-server-packer]
 aws_access_key_id = AKIAXXXXXXXXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-[cool-images-ec2amicreate-ubuntu-packer]
-role_arn = arn:aws:iam::111111111111:role/EC2AMICreate-build-ubuntu-packer
-source_profile = build-ubuntu-packer
+[cool-images-ec2amicreate-ubuntu-server-packer]
+role_arn = arn:aws:iam::111111111111:role/EC2AMICreate-build-ubuntu-server-packer
+source_profile = build-ubuntu-server-packer
 role_session_name = example
 ```
 
@@ -125,7 +125,7 @@ Here is an example of how to kick off a pre-release build:
 ```console
 pip install --requirement requirements-dev.txt
 ansible-galaxy install --force --force-with-deps --role-file src/requirements.yml
-AWS_PROFILE=cool-images-ec2amicreate-ubuntu-packer packer build --timestamp-ui -var release_tag=$(./bump_version.sh show) -var is_prerelease=true src/packer.pkr.hcl
+AWS_PROFILE=cool-images-ec2amicreate-ubuntu-server-packer packer build --timestamp-ui -var release_tag=$(./bump_version.sh show) -var is_prerelease=true src/packer.pkr.hcl
 ```
 
 If you are satisfied with your pre-release image, you can easily create a release
@@ -142,7 +142,7 @@ region_kms_keys = {
 ```
 
 ```console
-AWS_PROFILE=cool-images-ec2amicreate-ubuntu-packer packer build --timestamp-ui -var-file release.pkrvars.hcl src/packer.pkr.hcl
+AWS_PROFILE=cool-images-ec2amicreate-ubuntu-server-packer packer build --timestamp-ui -var-file release.pkrvars.hcl src/packer.pkr.hcl
 ```
 
 ### Giving Other AWS Accounts Permission to Launch the Image ###

@@ -5,6 +5,6 @@ terraform {
     dynamodb_table = "terraform-state-lock"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "ubuntu-packer/terraform-build-user.tfstate"
+    key            = "ubuntu-server-packer/terraform-build-user.tfstate"
   }
 }

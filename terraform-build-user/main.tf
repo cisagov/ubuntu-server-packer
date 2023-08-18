@@ -11,5 +11,5 @@ module "iam_user" {
 
   # This module fails unless there is at least one SSM parameter
   ssm_parameters = ["dummy_ssm_parameter"]
-  user_name      = "build-ubuntu-packer"
+  user_name      = "build-ubuntu-server-packer"
 }
