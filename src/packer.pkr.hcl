@@ -105,6 +105,11 @@ source "amazon-ebs" "ubuntu_server" {
 build {
   sources = ["source.amazon-ebs.ubuntu_server"]
 
+  # We are adding this to avoid the failure to install aptitude during build time 
+  provisioner "shell" {
+    inline = ["sudo apt-get update"]
+  }
+
   provisioner "ansible" {
     playbook_file = "src/upgrade.yml"
     use_proxy     = false
