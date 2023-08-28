@@ -6,7 +6,7 @@ rm --force /root/.ssh/authorized_keys
 /usr/sbin/userdel --remove --force ubuntu
 sudo snap switch --channel=candidate amazon-ssm-agent
 sudo snap refresh amazon-ssm-agent
-[[ -d /etc/amazon/ssm ]] || sudo mkdir -p /etc/amazon/ssm
+[[ -d /etc/amazon/ssm ]] || sudo mkdir --parents /etc/amazon/ssm
 sudo cp -RT /snap/amazon-ssm-agent/current/ /etc/amazon/ssm/
 sudo cp /snap/amazon-ssm-agent/current/seelog.xml.template /etc/amazon/ssm/seelog.xml
 sudo snap restart amazon-ssm-agent
