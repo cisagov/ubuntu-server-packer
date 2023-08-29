@@ -129,9 +129,13 @@ build {
     use_sftp         = true
   }
 
+  // provisioner "shell" {
+  //   execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }} ; rm -f {{ .Path }}"
+  // }
+
   provisioner "shell" {
-    execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }} ; rm -f {{ .Path }}"
     script          = "src/post_setup.sh"
+    execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     skip_clean      = true
   }
 }
