@@ -123,6 +123,7 @@ build {
   }
 
   provisioner "ansible" {
+    extra_arguments  = ["-vvvv"]
     ansible_env_vars = ["AWS_DEFAULT_REGION=${var.build_region}"]
     playbook_file    = "src/playbook.yml"
     use_proxy        = false
