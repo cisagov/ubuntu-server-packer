@@ -130,12 +130,14 @@ build {
   }
 
   provisioner "shell" {
+    // We need to call bash here because /tmp has the noexec bit on it
     execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} bash {{ .Path }} ; rm -f {{ .Path }}"
     inline          = ["sed -i '/^users:/ {N; s/users:.*/users: []/g}' /etc/cloud/cloud.cfg", "rm --force /etc/sudoers.d/90-cloud-init-users", "rm --force /root/.ssh/authorized_keys", "/usr/sbin/userdel --remove --force admin"]
     skip_clean      = true
   }
 
   provisioner "shell" {
+    // This configures the snap version of amazon-ssm-agent
     script          = "src/post_setup.sh"
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
     skip_clean      = true
