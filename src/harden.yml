@@ -7,3 +7,6 @@
     - name: Harden system
       ansible.builtin.include_role:
         name: harden
+    - name: Install and configure login banner
+      ansible.builtin.include_role:
+        name: banner
