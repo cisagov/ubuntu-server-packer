@@ -106,7 +106,7 @@ build {
   sources = ["source.amazon-ebs.ubuntu_server"]
 
   # We are adding this to avoid the failure to install aptitude during build time 
-  # A bug for this has been created here: #12
+  # Issue #12 has been created for this.
   provisioner "shell" {
     inline = ["sudo apt-get update"]
   }
