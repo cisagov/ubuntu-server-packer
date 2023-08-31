@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # The amazon-ssm-agent package in the stable channel is typically out-dated.
-# In order to pull the latest stable version, Amazon recommends swithing to the candidate channel.
+# In order to pull the latest stable version, Amazon recommends switching to the candidate channel.
 # Also, the snap version of amazon-ssm-agent does not actually sync correctly with the service.
 # Amazon recommends copying the data from the snap dir to one under /etc in order to collect logs correctly
 # https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-ubuntu-64-snap.html
