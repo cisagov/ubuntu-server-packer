@@ -9,7 +9,5 @@ module "iam_user" {
     aws.images-staging-ssm    = aws.images-staging-ssm
   }
 
-  # This module fails unless there is at least one SSM parameter
-  ssm_parameters = ["dummy_ssm_parameter"]
-  user_name      = "build-ubuntu-server-packer"
+  user_name = "build-ubuntu-server-packer"
 }
