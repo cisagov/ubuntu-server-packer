@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
 
 # Moved out of packer.pkr.hcl's inline provisioner shell to here.
 # These commands come from here:
