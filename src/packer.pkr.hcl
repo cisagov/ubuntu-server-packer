@@ -87,7 +87,7 @@ source "amazon-ebs" "ubuntu_server" {
     Application        = "Ubuntu Server"
     Base_AMI_Name      = data.amazon-ami.ubuntu_server_jammy.name
     GitHub_Release_URL = var.release_url
-    OS_Version         = "Ubuntu Jammy"
+    OS_Version         = "Ubuntu Jammy Jellyfish"
     Pre_Release        = var.is_prerelease
     Release            = var.release_tag
     Team               = "VM Fusion - Development"
