@@ -24,12 +24,12 @@ locals {
   account_name_regex  = format("^env[[:digit:]]+ \\(%s\\)$", local.images_account_type)
 }
 
-# The IDs of all cisagov/ubuntu-packer AMIs
+# The IDs of all cisagov/ubuntu-server-packer AMIs
 data "aws_ami_ids" "historical_amis" {
   filter {
     name = "name"
     values = [
-      "example-hvm-*-x86_64-ebs",
+      "ubuntu-server-hvm-*-x86_64-ebs",
     ]
   }
 

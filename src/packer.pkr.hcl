@@ -46,21 +46,21 @@ variable "skip_create_ami" {
   type        = bool
 }
 
-data "amazon-ami" "debian_bullseye" {
+data "amazon-ami" "ubuntu_server_jammy" {
   filters = {
-    name                = "debian-11-amd64-*"
+    name                = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server*"
     root-device-type    = "ebs"
     virtualization-type = "hvm"
   }
   most_recent = true
-  owners      = ["136693071363"]
+  owners      = ["099720109477"]
   region      = var.build_region
 }
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
-source "amazon-ebs" "example" {
-  ami_name                    = "example-hvm-${local.timestamp}-x86_64-ebs"
+source "amazon-ebs" "ubuntu_server" {
+  ami_name                    = "ubuntu-server-hvm-${local.timestamp}-x86_64-ebs"
   ami_regions                 = var.ami_regions
   associate_public_ip_address = true
   encrypt_boot                = true
@@ -76,18 +76,18 @@ source "amazon-ebs" "example" {
   region             = var.build_region
   region_kms_key_ids = var.region_kms_keys
   skip_create_ami    = var.skip_create_ami
-  source_ami         = data.amazon-ami.debian_bullseye.id
-  ssh_username       = "admin"
+  source_ami         = data.amazon-ami.ubuntu_server_jammy.id
+  ssh_username       = "ubuntu"
   subnet_filter {
     filters = {
       "tag:Name" = "AMI Build"
     }
   }
   tags = {
-    Application        = "Example"
-    Base_AMI_Name      = data.amazon-ami.debian_bullseye.name
+    Application        = "Ubuntu Server"
+    Base_AMI_Name      = data.amazon-ami.ubuntu_server_jammy.name
     GitHub_Release_URL = var.release_url
-    OS_Version         = "Debian Bullseye"
+    OS_Version         = "Ubuntu Jammy Jellyfish"
     Pre_Release        = var.is_prerelease
     Release            = var.release_tag
     Team               = "VM Fusion - Development"
@@ -103,7 +103,13 @@ source "amazon-ebs" "example" {
 }
 
 build {
-  sources = ["source.amazon-ebs.example"]
+  sources = ["source.amazon-ebs.ubuntu_server"]
+
+  # We are adding this to avoid the failure to install aptitude during build time 
+  # Issue #12 has been created for this.
+  provisioner "shell" {
+    inline = ["sudo apt-get update"]
+  }
 
   provisioner "ansible" {
     playbook_file = "src/upgrade.yml"
@@ -126,7 +132,7 @@ build {
 
   provisioner "shell" {
     execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }} ; rm -f {{ .Path }}"
-    inline          = ["sed -i '/^users:/ {N; s/users:.*/users: []/g}' /etc/cloud/cloud.cfg", "rm --force /etc/sudoers.d/90-cloud-init-users", "rm --force /root/.ssh/authorized_keys", "/usr/sbin/userdel --remove --force admin"]
+    script          = "src/post_setup.sh"
     skip_clean      = true
   }
 }
