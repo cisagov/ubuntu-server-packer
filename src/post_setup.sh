@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 # The amazon-ssm-agent package in the stable channel is typically out-dated.
 # In order to pull the latest stable version, Amazon recommends switching to the candidate channel.
