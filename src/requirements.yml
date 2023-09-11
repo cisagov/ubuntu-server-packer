@@ -12,8 +12,9 @@
 - name: cloudwatch_agent
   src: https://github.com/cisagov/ansible-role-cloudwatch-agent
 - name: harden
-# TODO: Once we validate that the cisagov-changes branch is working, we can merge into the default branch.
-# When done, we will remove the version: cisagov-changes, so we are pulling from the default branch.
+# TODO: Once we validate that the cisagov-changes branch is working,
+# we can merge into the default branch.  When done, we will remove the
+# version: cisagov-changes, so we are pulling from the default branch.
 # Issue #16 has been created for this.
   src: https://github.com/cisagov/ansible-role-hardening-2
   version: cisagov-changes
