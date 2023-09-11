@@ -131,8 +131,8 @@ build {
   }
 
   provisioner "shell" {
-    script          = "src/post_setup.sh"
     execute_command = "{{ .Vars }} bash '{{ .Path }}'"
+    script          = "src/post_setup.sh"
     skip_clean      = true
   }
 
