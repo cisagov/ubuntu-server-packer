@@ -131,7 +131,7 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "{{ .Vars }} bash {{ .Path }}"
+    execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} bash {{ .Path }} ; rm -f {{ .Path }}"
     script          = "src/post_setup.sh"
     skip_clean      = true
   }
