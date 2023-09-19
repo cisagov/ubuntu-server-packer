@@ -3,6 +3,8 @@
   name: Hardening tasks
   become: yes
   become_method: ansible.builtin.sudo
+# Install Banner after hardening instead of during base.yml setup.
+# The hardening script sets the banner acccording to CIS guidlines.
   tasks:
     - name: Harden system
       ansible.builtin.include_role:
