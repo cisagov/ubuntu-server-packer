@@ -10,3 +10,6 @@
 
 - name: Import cloud-init playbook
   ansible.builtin.import_playbook: cloud_init.yml
+
+- name: Import hardening playbook
+  ansible.builtin.import_playbook: harden.yml

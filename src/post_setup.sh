@@ -4,14 +4,6 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-# Moved out of packer.pkr.hcl's inline provisioner shell to here.
-# These commands come from here:
-# https://github.com/cisagov/debian-packer/blob/e34570f730a04b680bcff5313384a1a13b4c935a/src/packer.pkr.hcl#L129
-sed --in-place '/^users:/ {N; s/users:.*/users: []/g}' /etc/cloud/cloud.cfg
-rm --force /etc/sudoers.d/90-cloud-init-users
-rm --force /root/.ssh/authorized_keys
-/usr/sbin/userdel --remove --force ubuntu
-
 # The amazon-ssm-agent package in the stable channel is typically out-dated.
 # In order to pull the latest stable version, Amazon recommends switching to the candidate channel.
 # Also, the snap version of amazon-ssm-agent does not actually sync correctly with the service.

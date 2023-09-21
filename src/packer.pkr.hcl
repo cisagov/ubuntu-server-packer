@@ -105,7 +105,7 @@ source "amazon-ebs" "ubuntu_server" {
 build {
   sources = ["source.amazon-ebs.ubuntu_server"]
 
-  # We are adding this to avoid the failure to install aptitude during build time 
+  # We are adding this to avoid the failure to install aptitude during build time
   # Issue #12 has been created for this.
   provisioner "shell" {
     inline = ["sudo apt-get update"]
@@ -131,8 +131,15 @@ build {
   }
 
   provisioner "shell" {
-    execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} {{ .Path }} ; rm -f {{ .Path }}"
+    execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} bash {{ .Path }} ; rm -f {{ .Path }}"
     script          = "src/post_setup.sh"
+    skip_clean      = true
+  }
+
+  provisioner "shell" {
+    # We need to call bash here because /tmp has the noexec bit on it
+    execute_command = "chmod +x {{ .Path }}; sudo env {{ .Vars }} bash {{ .Path }} ; rm -f {{ .Path }}"
+    inline          = ["sed --in-place '/^users:/ {N; s/users:.*/users: []/g}' /etc/cloud/cloud.cfg", "rm --force /etc/sudoers.d/90-cloud-init-users", "rm --force /root/.ssh/authorized_keys"]
     skip_clean      = true
   }
 }

@@ -7,9 +7,6 @@
     - name: Install and configure automated security updates
       ansible.builtin.include_role:
         name: automated_security_updates
-    - name: Install and configure login banner
-      ansible.builtin.include_role:
-        name: banner
     - name: Install and configure ClamAV
       ansible.builtin.include_role:
         name: clamav
