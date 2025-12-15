@@ -1,6 +1,8 @@
 # ubuntu-server-packer #
 
 [![GitHub Build Status](https://github.com/cisagov/ubuntu-server-packer/workflows/build/badge.svg)](https://github.com/cisagov/ubuntu-server-packer/actions)
+[![License](https://img.shields.io/github/license/cisagov/ubuntu-server-packer)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/ubuntu-server-packer/workflows/CodeQL/badge.svg)](https://github.com/cisagov/ubuntu-server-packer/actions/workflows/codeql-analysis.yml)
 
 This project can be used to build an
 [Ubuntu Server 24.04 (Noble Numbat)](https://releases.ubuntu.com/noble/) AMI.
