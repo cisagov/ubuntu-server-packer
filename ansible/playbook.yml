@@ -9,6 +9,11 @@
     configuration fix
   ansible.builtin.import_playbook: install-prerequisites-for-netplan-configuration-fix.yml
 
+- name: >-
+    Import playbook to fix a race condition associated with the
+    OpenSSH service
+  ansible.builtin.import_playbook: fix-openssh.yml
+
 - name: Import UFW playbook
   ansible.builtin.import_playbook: ufw.yml
 
