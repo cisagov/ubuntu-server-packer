@@ -17,3 +17,6 @@
 
 - name: Import hardening playbook
   ansible.builtin.import_playbook: harden.yml
+
+- name: Import Wazuh agent playbook
+  ansible.builtin.import_playbook: wazuh_agent.yml

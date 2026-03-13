@@ -7,5 +7,9 @@ module "iam_user" {
     aws.images-ssm = aws.images-ssm
   }
 
+  ssm_parameters = [
+    # Necessary when building any instances that run the Wazuh agent
+    "/wazuh_agent/manager",
+  ]
   user_name = "build-ubuntu-server-packer"
 }
