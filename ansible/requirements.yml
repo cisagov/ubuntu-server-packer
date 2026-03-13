@@ -13,8 +13,11 @@ collections:
   # - ansible-role-amazon-ssm-agent (uses community.general.snap)
   # - ansible-role-automated-security-updates (uses community.general.ini_file)
   # - ansible-role-cloudwatch-agent (uses community.general.ini_file)
+  # - ansible-role-hardening-2 (uses community.general.modprobe and
+  #   community.general.ufw)
   # - ansible-role-persist-journald (uses community.general.ini_file)
   # - ansible-role-systemd-resolved (uses community.general.ini_file)
+  # - ansible-role-ufw (uses community.general.ufw)
   - community.general
 roles:
   - name: amazon_ssm_agent
