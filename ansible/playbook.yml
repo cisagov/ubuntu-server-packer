@@ -9,6 +9,9 @@
     configuration fix
   ansible.builtin.import_playbook: install-prerequisites-for-netplan-configuration-fix.yml
 
+- name: Import playbook to fix a minor issue with the OpenSSH installation
+  ansible.builtin.import_playbook: fix-openssh.yml
+
 - name: Import UFW playbook
   ansible.builtin.import_playbook: ufw.yml
 
@@ -17,3 +20,6 @@
 
 - name: Import hardening playbook
   ansible.builtin.import_playbook: harden.yml
+
+- name: Import Wazuh agent playbook
+  ansible.builtin.import_playbook: wazuh_agent.yml

@@ -1,0 +1,21 @@
+---
+# This is necessary for the validate portion of this task to succeed
+# on Ubuntu 24.04:
+# https://github.com/cisagov/ansible-role-hardening-2/blob/d63cdc00ddedb4f4f99ff1102d5b0fb068874c46/tasks/sshconfig.yml#L71-L123
+#
+# This is because the runtime directory /run/sshd directory only
+# exists while the OpenSSH service is actually running, and that isn't
+# always the case when we hit the validate portion of the task while
+# building the AMI.
+- name: Pre-create the /run/sshd directory
+  hosts: all
+  become: true
+  become_method: ansible.builtin.sudo
+  tasks:
+    - name: Pre-create the /run/sshd directory
+      ansible.builtin.file:
+        group: root
+        mode: u=rwx,g=rx,o=rx
+        owner: root
+        path: /run/sshd
+        state: directory
