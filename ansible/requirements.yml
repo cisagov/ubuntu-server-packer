@@ -24,6 +24,7 @@ roles:
     src: https://github.com/cisagov/ansible-role-amazon-ssm-agent
   - name: amazon_efs_utils
     src: https://github.com/cisagov/ansible-role-amazon-efs-utils
+    version: improvement/add-support-for-ubuntu-resolute
   - name: automated_security_updates
     src: https://github.com/cisagov/ansible-role-automated-security-updates
   - name: banner
